@@ -5,6 +5,6 @@ int main() {
     pn = &n;
     *pn = 33;
     printf("n = %d\n", n);
-    printf("pn = %p\n", (int*)pn);
+    //printf("pn = %p\n", (int*)pn);
     return 0;
 }
