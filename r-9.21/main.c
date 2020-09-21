@@ -1,10 +1,10 @@
-#include <stdio.h>
+#include "util.c"
 
 int main() {
-    int n = 0, *pn;
-    pn = &n;
-    *pn = 33;
-    printf("n = %d\n", n);
-    //printf("pn = %p\n", (int*)pn);
+    int n = 3;
+    pointers(n);
+    condition(n);
+    loops(n);
+    array(n);
     return 0;
 }
