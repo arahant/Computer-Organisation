@@ -54,7 +54,7 @@ void loops(int n) {
     while(i<n) {
         printf("%d\n", i);
         i++;
-    }
+    }e
     printf("loop 2 ended\n");
 
     i=0;
