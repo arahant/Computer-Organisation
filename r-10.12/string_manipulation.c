@@ -2,15 +2,18 @@
 #include<stdlib.h>
 #include<strings.h>
 
+#include "hash_table.c"
+
 #define MAX 1024
+#define KEY 26
 
-char *diff1, diff2;
-int ctr = 0;
-int diff_ctr = 0;
+struct htable *head = NULL;
 
-void print_words(char *words[MAX], int n) {
-    for(int i=0;i<n;i++)
-        puts(words[i]);
+void insert_words(char *words[MAX], int n) {
+    for(int i=0;i<n;i++) {
+        // puts(words[i]);
+        head = insert_htable(head,words[i],KEY);
+    }
 }
 
 void extract_words(char buf[MAX]) {
@@ -42,22 +45,8 @@ void extract_words(char buf[MAX]) {
         }
     }
     if(w>0)
-        print_words(words,w);
+        insert_words(words,w);
 }
-
-// void diff(char *buf1, char *buf2) {
-//     int i=0;
-//     while(i<MAX) {
-//         char c1 = buf1[i];
-//         char c2 = buf2[i];
-//         if(c1!=c2) {
-//             diff_ctr = ctr;
-//             diff1[i] = c1;
-//             diff2[i] = c2;
-//         }
-//         ctr++;
-//     }
-// }
 
 int main(int n, char *args[]) {
     FILE *fp = fopen(args[1],"r");
@@ -66,6 +55,7 @@ int main(int n, char *args[]) {
     while(fgets(buf,MAX,fp)!=NULL) {
         extract_words(buf);
     }
+    print_htable(head);
     fclose(fp);
     return 0;
 }
