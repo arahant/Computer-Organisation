@@ -39,7 +39,7 @@ int main(int n, char *args) {
         int v;
         for(int i=0;i<n1;i++) {
             scanf("%d",&v);
-            insert()
+            insert(v,key);
         }
     }
     return 0;
