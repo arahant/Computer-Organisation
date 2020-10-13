@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+#define MAX 1024
+
+struct diff {
+    int col;
+    int row;
+    char *line1;
+    char *line2;
+};
+
+struct diff* save_diff(int c, int r, char l1[MAX], char l2[MAX]) {
+    struct diff *node = (struct diff*) malloc(sizeof(struct diff));
+    node->col = c;
+    node->row = r;
+    node->line1 = l1;
+    node->line2 = l2;
+    return node;
+}
+
+void print_diff(struct diff *node) {
+    printf("r%dc%d\n",node->row+1,node->col+1);
+    printf("< %s\n",node->line1);
+    printf("---\n");
+    printf("> %s\n",node->line2);
+}
