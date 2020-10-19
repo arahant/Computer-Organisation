@@ -16,15 +16,6 @@ bool ignore_case  = false;
 bool ignore_space = false;
 bool ignore_blank = false;
 
-int str_cmp_o(char *buf1, char *buf2) {
-    int diff = 0;
-    if(ignore_case)
-        diff = strcasecmp(buf1,buf2);
-    else
-        diff = strcmp(buf1,buf2);
-    return diff;
-}
-
 int str_cmp(char *buf1, char *buf2) {
     int diff = 0;
     int i1=0, i2=0;
