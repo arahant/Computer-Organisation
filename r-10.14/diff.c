@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<strings.h>
 
-#define MAX 1024
+#define MAX 2048
 
 struct diff {
     int col;
