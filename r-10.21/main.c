@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<strings.h>
+
+#include "hash_table.c"
+
+#define MAX 1024
+#define KEY 26
+
+struct htable *head = NULL;
+
+void insert_words(char *words[MAX], int n) {
+    for(int i=0;i<n;i++) {
+        // puts(words[i]);
+        head = insert_htable(head,words[i],KEY);
+    }
+}
+
+void extract_words(char buf[MAX]) {
+    char *stop = strchr(buf, '\0');
+    int id1 = (int) (stop - buf);
+    char *nl = strchr(buf, '\n');
+    int id2 = (int) (nl - buf);
+    int max = id1<id2?id1:id2;
+
+    char *words[MAX];
+    int i = -1;
+    int c = 0;
+    int a = 0;
+    int w = 0;
+
+    while(++i<max) {
+        a = (int) buf[i];
+        if((a>=65 && a<=90) || (a>=97 && a<=122)) {
+            c++;
+        }
+        else {
+            if(c>0) {
+                char *word = malloc(sizeof(char)*c);
+                strncpy(word,buf+i-c,c);
+                words[w++] = word;
+                word = NULL;
+                c=0;
+            }
+        }
+    }
+    if(w>0)
+        insert_words(words,w);
+}
+
+int main(int n, char *args[]) {
+    FILE *fp = fopen(args[1],"r");
+    char buf[MAX];
+    bzero(buf,MAX);
+    while(fgets(buf,MAX,fp)!=NULL) {
+        extract_words(buf);
+    }
+    print_htable(head);
+    fclose(fp);
+    return 0;
+}
