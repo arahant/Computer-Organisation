@@ -4,7 +4,7 @@
 
 #include "node1d.c"
 
-#define MAX 1024
+#define MAX 2048
 #define KEY 26
 
 struct node1d *head = NULL;
@@ -70,7 +70,8 @@ int main(int n, char *args[]) {
     //     insert_word(word);
     // }
 
-    // print_words(head);
+    print_words(head);
+
     int res = lookup_node1(head, args[2], KEY);
     if(res==1)
         puts("word found");
