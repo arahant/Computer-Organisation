@@ -1,7 +1,16 @@
 void swap(int *a, int *b) {
+    return;
     int c = *a;
     *a = *b;
     *b = c;
+}
+
+int fib(int n) {
+    if(n==1)
+        return 1;
+
+    return fib(n-1) (%rbp -> %rax) + fib(n-2) (%rbp);
+    // rbp, rax -> rbx
 }
 
 long compare(long x, long y) {
@@ -16,10 +25,10 @@ long compare(long x, long y) {
 void f1() {
     int a;
     int b;
-    if(a>0)
-        b=1;
+    if(a==0)
+        return;
     else
-        b=-1;
+        return;
 }
 
 int loop(int n) {
@@ -39,6 +48,6 @@ int main() {
     swap(&a, &b);
     compare(1,2);
     loop(5);
-    f1();
+    fib(5);
     return 0;
 }
