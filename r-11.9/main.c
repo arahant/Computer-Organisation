@@ -58,6 +58,9 @@ void extract_words(char buf[MAX], char *words[MAX]) {
     int a = 0;
     int w = 0;
 
+    // \w [a-zA-Z0-9]
+    // appendRear2D hello world
+
     while(++i<max) {
         a = (int) buf[i];
         if((a>=65 && a<=90) || (a>=97 && a<=122) || (a>=48 && a<=57)) {
@@ -77,33 +80,55 @@ void extract_words(char buf[MAX], char *words[MAX]) {
 
 int execute_command(char *words[MAX]) {
     char *command = words[0];
-    int res = -1;
+    int res = 0;
     if(strcmp(command, APPEND_REAR_2D)) {
         puts(command);
         res = append_node2d_rear(head, words[1]);
     }
     else if(strcmp(command, APPEND_AFTER_2D)) {
         puts(command);
+
         res = append_node2d_after(head, words[1], words[2]);
     }
     else if(strcmp(command, APPEND_REAR_1D)) {
         puts(command);
-        res = append_node2d_after(head, words[1], words[2]);
+        res = append_node1d_rear(head, words[1], words[2]);
     }
     else if(strcmp(command, APPEND_AFTER_1D)) {
         puts(command);
-        res = append_node1d(head, words[1], words[2]);
+        res = append_node1d_after(head, words[1], words[2]);
     }
-    else if(strcmp(command, PRINT_ALL))
+    else if(strcmp(command, PRINT_ALL)) {
+        res = print_all(head);
         puts(command);
-    else if(strcmp(command, PRINT_1D))
+    }
+    else if(strcmp(command, PRINT_1D)) {
+        res = print_2d(head, words[1]);
         puts(command);
-    else if(strcmp(command, FIND_1D))
+    }
+    else if(strcmp(command, FIND_2D)) {
+        int res = lookup_node2d(head, words[1]);
+        if (res==1) puts("found");
+        else puts("not found");
         puts(command);
-    else if(strcmp(command, FIND_2D))
+    }
+    else if(strcmp(command, FIND_1D)) {
+        int res = lookup_node2d_1d(head, words[1]);
+        if (res==1) puts("found");
+        else puts("not found");
         puts(command);
+    }
     return res;
 }
+
+// abc -> cso1 -> sally -> NULL
+// alice -> NULL
+// r2d2 -> cso -> abc -> NULL
+
+// appendAfter1D abc cso
+// print1D r2d2
+// find2D r2d
+// find1D sally
 
 int main(int n, char *args[]) {
     // char *w;
