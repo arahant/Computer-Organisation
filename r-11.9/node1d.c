@@ -51,13 +51,13 @@ int insert_node1d_after(struct node1d *head, char *word, char *key) {
     }
     else {
         struct node1d *node = head;
-        while(node->next!=NULL && strcmp(node->next->data, key)) {
+        while(node->next!=NULL && strcmp(node->next->data, key)==0) {
             node = node->next;
         }
         if(node->next==NULL) {
             return 0;
         }
-        else if(strcmp(node->next->data, key)) {
+        else if(strcmp(node->next->data, key)==0) {
             struct node1d *temp = (struct node1d*) malloc(sizeof(struct node1d));
             temp->data = word;
             temp->next = node->next;
@@ -71,7 +71,7 @@ int insert_node1d_after(struct node1d *head, char *word, char *key) {
 
 int lookup_node1d(struct node1d *head, char *word) {
     struct node1d *temp = head;
-    while(temp!=NULL && strcmp(temp->data, word))
+    while(temp!=NULL && strcmp(temp->data, word)==0)
         temp = temp->next;
     if(temp==NULL)
         return 0;

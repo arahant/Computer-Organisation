@@ -81,40 +81,40 @@ void extract_words(char buf[MAX], char *words[MAX]) {
 int execute_command(char *words[MAX]) {
     char *command = words[0];
     int res = 1;
-    if(strcmp(command, APPEND_REAR_2D)) {
+    if(strcmp(command, APPEND_REAR_2D)==0) {
         head = append_node2d_rear(head, words[1]);
         puts("1");
         if(head==NULL)
             return 0;
     }
-    else if(strcmp(command, APPEND_AFTER_2D)) {
+    else if(strcmp(command, APPEND_AFTER_2D)==0) {
         puts("2");
 
         res = append_node2d_after(head, words[1], words[2]);
     }
-    else if(strcmp(command, APPEND_REAR_1D)) {
+    else if(strcmp(command, APPEND_REAR_1D)==0) {
         puts("3");
         res = append_node1d_rear(head, words[1], words[2]);
     }
-    else if(strcmp(command, APPEND_AFTER_1D)) {
+    else if(strcmp(command, APPEND_AFTER_1D)==0) {
         puts("4");
         res = append_node1d_after(head, words[1], words[2]);
     }
-    else if(strcmp(command, PRINT_ALL)) {
+    else if(strcmp(command, PRINT_ALL)==0) {
         puts("5");
         res = print_all(head);
     }
-    else if(strcmp(command, PRINT_1D)) {
+    else if(strcmp(command, PRINT_1D)==0) {
         res = print_2d(head, words[1]);
         puts("6");
     }
-    else if(strcmp(command, FIND_2D)) {
+    else if(strcmp(command, FIND_2D)==0) {
         puts("7");
         int res = lookup_node2d(head, words[1]);
         if (res==1) puts("found");
         else puts("not found");
     }
-    else if(strcmp(command, FIND_1D)) {
+    else if(strcmp(command, FIND_1D)==0) {
         puts("8");
         int res = lookup_node2d_1d(head, words[1]);
         if (res==1) puts("found");
@@ -143,9 +143,8 @@ int main(int n, char *args[]) {
         bzero(command,MAX);
         gets(command);
         int l = strlen(command);
-        printf("%d-\n",l);
         command[l] = ' ';
-        command[l+2] = '\0';
+        command[l+1] = '\0';
         if(!command[0])
             break;
         char *words[MAX];

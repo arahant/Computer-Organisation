@@ -26,7 +26,7 @@ int get_hash(char *word, int key) {
 }
 
 //
-struct node2d* append_node2d_rear(struct node2d *head, char *word) {
+int append_node2d_rear(struct node2d *head, char *word) {
     if(head==NULL) {
         // if this condition then the hash doesn't exist, so insert a new hash table node
         struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
@@ -35,6 +35,7 @@ struct node2d* append_node2d_rear(struct node2d *head, char *word) {
         temp->first = NULL;
         head = temp;
         printf("1. Inserting '%s'\n",word);
+        return 1;
     }
     else {
         struct node2d *node = head;
@@ -49,9 +50,10 @@ struct node2d* append_node2d_rear(struct node2d *head, char *word) {
             temp->down = NULL;
             node->down = temp;
             printf("2. Inserting '%s'\n",word);
+            return 1;
         }
     }
-    return head;
+    return 0;
 }
 
 int append_node2d_after(struct node2d *head, char *word, char* key) {
@@ -60,21 +62,16 @@ int append_node2d_after(struct node2d *head, char *word, char* key) {
         struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
         temp->word = word;
         temp->down = NULL;
+        temp->first = NULL;
         head = temp;
-        // temp->first = insert_node1d_head(temp->first,word);
         return 1;
     }
     else {
         struct node2d *node = head;
-        while(node->down!=NULL && node->down->word!=key) {
+        while(node->down!=NULL && strcmp(node->down->word,key)==0) {
             node = node->down;
         }
         if(node->down==NULL) {
-            // struct node2d *temp = (struct node2d*) malloc(sizeof(struct node2d));
-            // temp->word = word;
-            // temp->down = NULL;
-            // node->down = temp;
-            // temp->first = insert_node1d_head(temp->first,word);
             return 0;
         }
         else if(node->down->word==key) {
@@ -82,7 +79,7 @@ int append_node2d_after(struct node2d *head, char *word, char* key) {
             temp->word = word;
             temp->down = node->down;
             node->down = temp;
-            // temp->first = insert_node1d_head(temp->first,word);
+            temp->first = NULL;
             return 1;
         }
         return 0;
@@ -132,7 +129,7 @@ int lookup_node2d(struct node2d *head, char *key) {
         temp = temp->down;
     if(temp==NULL)
         return 0;
-    else if(strcmp(temp->word,key))
+    else if(strcmp(temp->word,key)==0)
         return 1;
     return 0;
 }
@@ -160,7 +157,7 @@ int print_all(struct node2d *head) {
 int print_2d(struct node2d *head, char *name2d) {
     struct node2d *temp = head;
     while(temp!=NULL) {
-        if(strcmp(temp->word, name2d)) {
+        if(strcmp(temp->word, name2d)==0) {
             print_1d(temp->first);
             break;
         }
