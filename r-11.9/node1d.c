@@ -45,7 +45,7 @@ struct node1d* insert_node1d_tail(struct node1d *head, char *word) {
     }
 }
 
-struct node1d* insert_node1d_after(struct node1d *head, char *word, char *key) {
+int insert_node1d_after(struct node1d *head, char *word, char *key) {
     if(head==NULL) {
         return 0;
     }

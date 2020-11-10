@@ -61,7 +61,7 @@ void extract_words(char buf[MAX], char *words[MAX]) {
     // \w [a-zA-Z0-9]
     // appendRear2D hello world
 
-    while(++i<max) {
+    while(++i<strlen(buf)) {
         a = (int) buf[i];
         if((a>=65 && a<=90) || (a>=97 && a<=122) || (a>=48 && a<=57)) {
             c++;
@@ -80,43 +80,45 @@ void extract_words(char buf[MAX], char *words[MAX]) {
 
 int execute_command(char *words[MAX]) {
     char *command = words[0];
-    int res = 0;
+    int res = 1;
     if(strcmp(command, APPEND_REAR_2D)) {
-        puts(command);
-        res = append_node2d_rear(head, words[1]);
+        head = append_node2d_rear(head, words[1]);
+        puts("1");
+        if(head==NULL)
+            return 0;
     }
     else if(strcmp(command, APPEND_AFTER_2D)) {
-        puts(command);
+        puts("2");
 
         res = append_node2d_after(head, words[1], words[2]);
     }
     else if(strcmp(command, APPEND_REAR_1D)) {
-        puts(command);
+        puts("3");
         res = append_node1d_rear(head, words[1], words[2]);
     }
     else if(strcmp(command, APPEND_AFTER_1D)) {
-        puts(command);
+        puts("4");
         res = append_node1d_after(head, words[1], words[2]);
     }
     else if(strcmp(command, PRINT_ALL)) {
+        puts("5");
         res = print_all(head);
-        puts(command);
     }
     else if(strcmp(command, PRINT_1D)) {
         res = print_2d(head, words[1]);
-        puts(command);
+        puts("6");
     }
     else if(strcmp(command, FIND_2D)) {
+        puts("7");
         int res = lookup_node2d(head, words[1]);
         if (res==1) puts("found");
         else puts("not found");
-        puts(command);
     }
     else if(strcmp(command, FIND_1D)) {
+        puts("8");
         int res = lookup_node2d_1d(head, words[1]);
         if (res==1) puts("found");
         else puts("not found");
-        puts(command);
     }
     return res;
 }
@@ -136,9 +138,14 @@ int main(int n, char *args[]) {
     // puts(w);
 
     // Reading the command from user
-    char command[MAX] = "abc";
+    char command[MAX];
     while(1) {
+        bzero(command,MAX);
         gets(command);
+        int l = strlen(command);
+        printf("%d-\n",l);
+        command[l] = ' ';
+        command[l+2] = '\0';
         if(!command[0])
             break;
         char *words[MAX];
