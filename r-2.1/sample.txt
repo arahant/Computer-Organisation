@@ -1,0 +1,10 @@
+In your readLine function, you return a pointer to the line array (Strictly speaking, a pointer to its first character,
+but the difference is irrelevant here). Since it's an automatic variable (i.e., it's “on the stack”),
+the memory is reclaimed when the function returns. You see gibberish because printf has put its own stuff on the stack.
+You need to return a dynamically allocated buffer from the function. You already have one, it's lineBuffer;
+all you have to do is truncate it to the desired length.
+ADDED (response to follow-up question in comment):
+readLine returns a pointer to the characters that make up the line.
+This pointer is what you need to work with the contents of the line.
+It's also what you must pass to free when you've finished using the memory taken by these characters.
+Here's how you might use the readLine function:
