@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void defunct() {
-    printf("util.c");
-    // printf("hello util");
-}
-
 void parse(char *name) {
     FILE *fp = fopen(name, "r");
     int MAX = 255;
